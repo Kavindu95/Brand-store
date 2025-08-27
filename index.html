@@ -1,0 +1,641 @@
+!doctype html
+html lang=en
+head
+  meta charset=utf-8 
+  meta name=viewport content=width=device-width,initial-scale=1 
+  titleMini Clothing Storetitle
+
+  !-- Google Fonts (optional) --
+  link href=httpsfonts.googleapis.comcss2family=Interwght@300;400;600;700&display=swap rel=stylesheet
+
+  style
+     ---------------------------
+       Basic Reset & Variables
+       --------------------------- 
+    root{
+      --bg #f6f7fb;
+      --card #ffffff;
+      --muted #7b8094;
+      --accent #0f7bff;
+      --accent-2 #ff6b6b;
+      --glass rgba(255,255,255,0.6);
+      --shadow 0 6px 18px rgba(18,25,45,0.06);
+      --radius 12px;
+      font-family Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica Neue, Arial;
+    }
+    {box-sizingborder-box}
+    html,body{height100%}
+    body{
+      margin0;
+      background linear-gradient(180deg, #eef4ff 0%, var(--bg) 100%);
+      color#101828;
+      -webkit-font-smoothingantialiased;
+      -moz-osx-font-smoothinggrayscale;
+      padding24px;
+    }
+
+     ---------------------------
+       Layout
+       --------------------------- 
+    .app{
+      max-width1200px;
+      margin0 auto;
+    }
+    header{
+      displayflex;
+      gap16px;
+      align-itemscenter;
+      justify-contentspace-between;
+      margin-bottom20px;
+    }
+    .brand{
+      displayflex;
+      gap12px;
+      align-itemscenter;
+    }
+    .logo{
+      width56px;
+      height56px;
+      border-radius12px;
+      backgroundlinear-gradient(135deg,var(--accent), #6f9cff);
+      displayflex;
+      align-itemscenter;
+      justify-contentcenter;
+      colorwhite;
+      font-weight700;
+      box-shadow var(--shadow);
+    }
+    h1{font-size20px;margin0}
+    .subtitle{font-size13px;colorvar(--muted)}
+
+     Controls 
+    .controls{
+      displayflex;
+      gap12px;
+      align-itemscenter;
+      flex-wrapwrap;
+    }
+    .control{
+      backgroundvar(--card);
+      border-radius10px;
+      box-shadow var(--shadow);
+      padding8px;
+      displayflex;
+      gap8px;
+      align-itemscenter;
+    }
+    input[type=search]{
+      border0;
+      outline0;
+      font-size14px;
+      backgroundtransparent;
+      width220px;
+    }
+    select{border0;backgroundtransparent;font-size14px}
+    button.icon-btn{
+      backgroundvar(--accent);
+      colorwhite;
+      border0;
+      padding8px 12px;
+      border-radius10px;
+      font-weight600;
+      cursorpointer;
+      box-shadow 0 6px 18px rgba(15,123,255,0.18);
+    }
+
+     Main content 
+    .main{
+      displaygrid;
+      grid-template-columns 240px 1fr;
+      gap20px;
+    }
+
+     Sidebar filters 
+    .filters{
+      backgroundvar(--card);
+      border-radiusvar(--radius);
+      padding16px;
+      box-shadow var(--shadow);
+      heightfit-content;
+    }
+    .filters h3{margin0 0 10px 0;}
+    .categories{displayflex;flex-directioncolumn;gap8px}
+    .cat-btn{
+      padding8px 10px;
+      border-radius8px;
+      border1px solid #eef2ff;
+      backgroundtransparent;
+      text-alignleft;
+      cursorpointer;
+      color#263147;
+      font-weight600;
+    }
+    .cat-btn.active{backgroundlinear-gradient(90deg,var(--accent),#6f9cff);colorwhite;border0}
+
+     Product grid 
+    .products{
+      displaygrid;
+      grid-template-columns repeat(auto-fill,minmax(200px,1fr));
+      gap16px;
+    }
+    .card{
+      backgroundvar(--card);
+      border-radius14px;
+      padding12px;
+      box-shadow var(--shadow);
+      displayflex;
+      flex-directioncolumn;
+      gap10px;
+      transitiontransform .12s ease;
+    }
+    .cardhover{transformtranslateY(-6px)}
+    .img{
+      background#f3f6fb;
+      border-radius10px;
+      height180px;
+      displayflex;
+      align-itemscenter;
+      justify-contentcenter;
+      overflowhidden;
+    }
+    .img img{width100%;height100%;object-fitcover}
+
+    .meta{displayflex;justify-contentspace-between;align-itemscenter;gap8px}
+    .title{font-weight700}
+    .price{font-weight700;colorvar(--accent)}
+    .desc{font-size13px;colorvar(--muted);height36px;overflowhidden}
+
+    .card .actions{
+      displayflex;
+      gap8px;
+      margin-topauto;
+    }
+    .btn{
+      flex1;
+      padding8px 10px;
+      border-radius10px;
+      border0;
+      cursorpointer;
+      font-weight700;
+    }
+    .btn.ghost{backgroundtransparent;border1px solid #eef2ff}
+    .btn.primary{backgroundvar(--accent);colorwhite;box-shadow 0 10px 30px rgba(15,123,255,0.12)}
+
+     Cart drawer 
+    .cart-toggle{
+      positionfixed;
+      right24px;
+      bottom24px;
+      z-index120;
+      displayflex;
+      gap8px;
+      align-itemscenter;
+    }
+    .cart-btn{
+      backgroundvar(--accent);
+      colorwhite;
+      border0;
+      padding14px 16px;
+      border-radius14px;
+      font-weight800;
+      cursorpointer;
+      box-shadow 0 14px 36px rgba(15,123,255,0.18);
+    }
+    .cart-drawer{
+      positionfixed;
+      right24px;
+      bottom90px;
+      width360px;
+      max-height70vh;
+      backgroundlinear-gradient(180deg, rgba(255,255,255,0.98), var(--card));
+      border-radius14px;
+      box-shadow 0 30px 70px rgba(2,6,23,0.18);
+      overflowauto;
+      z-index120;
+      transform-originbottom right;
+      transitionall .18s ease;
+      padding12px;
+      displaynone;
+    }
+    .cart-drawer.open{displayblock}
+    .cart-item{displayflex;gap10px;align-itemscenter;padding8px;border-radius10px}
+    .cart-item + .cart-item{border-top1px solid #f1f5f9;padding-top12px}
+    .cart-item img{width64px;height64px;object-fitcover;border-radius8px}
+    .cart-item .info{flex1}
+    .qty-controls{displayflex;align-itemscenter;gap6px}
+    .qty-controls button{background#f1f5f9;border0;padding6px 8px;border-radius8px;cursorpointer}
+
+    .cart-footer{padding12px;border-top1px solid #eef2ff}
+    .total{displayflex;justify-contentspace-between;align-itemscenter;font-weight800;font-size16px}
+
+     Empty state 
+    .empty{displayflex;flex-directioncolumn;align-itemscenter;gap8px;padding24px;colorvar(--muted)}
+
+     Responsive 
+    @media (max-width880px){
+      .main{grid-template-columns1fr}
+      .filters{order2}
+      .brand h1{font-size18px}
+    }
+  style
+head
+body
+  div class=app
+    header
+      div class=brand
+        div class=logoCSdiv
+        div
+          h1Clothoryh1
+          div class=subtitleCasual, Street & Classic — curated picksdiv
+        div
+      div
+
+      div class=controls
+        div class=control style=min-width260px
+          svg width=16 height=16 viewBox=0 0 24 24 fill=none style=opacity.6path d=M21 21l-4.35-4.35 stroke=#1f2937 stroke-width=1.5 stroke-linecap=round stroke-linejoin=roundcircle cx=11 cy=11 r=6 stroke=#1f2937 stroke-width=1.5 stroke-linecap=round stroke-linejoin=roundsvg
+          input id=search type=search placeholder=Search clothing, e.g. 'jacket'
+        div
+
+        div class=control
+          select id=sort
+            option value=featuredFeaturedoption
+            option value=price-ascPrice Low → Highoption
+            option value=price-descPrice High → Lowoption
+            option value=nameName A → Zoption
+          select
+        div
+
+        div class=control
+          button id=clearFilters class=icon-btn title=ResetResetbutton
+        div
+      div
+    header
+
+    div class=main
+      aside class=filters
+        h3Categoriesh3
+        div class=categories id=categoriesdiv
+
+        h3 style=margin-top16pxPrice rangeh3
+        div style=displayflex;gap8px;align-itemscenter
+          input id=minPrice type=number placeholder=Min style=flex1;padding8px;border-radius8px;border1px solid #eef2ff
+          input id=maxPrice type=number placeholder=Max style=flex1;padding8px;border-radius8px;border1px solid #eef2ff
+        div
+        div style=margin-top10px;displayflex;gap8px
+          button id=applyPrice class=btn primary style=flex1Applybutton
+          button id=clearPrice class=btn ghost style=flex1Clearbutton
+        div
+      aside
+
+      main
+        section style=displayflex;align-itemscenter;justify-contentspace-between;margin-bottom10px
+          div style=font-size13px;colorvar(--muted)span id=resultCount0span itemsdiv
+          div style=font-size13px;colorvar(--muted)Free returns • 30-day exchangesdiv
+        section
+
+        section class=products id=products
+          !-- Products injected here --
+        section
+      main
+    div
+  div
+
+  !-- Cart toggle and drawer --
+  div class=cart-toggle
+    button id=cartBtn class=cart-btnCart (span id=cartCount0span)button
+  div
+
+  aside class=cart-drawer id=cartDrawer aria-hidden=true
+    div style=displayflex;justify-contentspace-between;align-itemscenter;padding6px 4px 12px 4px
+      h3 style=margin0Your Carth3
+      button id=closeCart class=btn ghostClosebutton
+    div
+
+    div id=cartItemsdiv
+
+    div class=cart-footer
+      div style=displayflex;justify-contentspace-between;align-itemscenter;margin-bottom12px
+        div style=font-size13px;colorvar(--muted)Shipping & taxes calculated at checkoutdiv
+      div
+      div class=total
+        divTotaldiv
+        divspan id=cartTotal$0.00spandiv
+      div
+      div style=margin-top12px;displayflex;gap8px
+        button id=checkoutBtn class=btn primary style=flex1Checkoutbutton
+        button id=clearCartBtn class=btn ghost style=flex1Clearbutton
+      div
+    div
+  aside
+
+  script
+    
+      Single-file Clothing Store
+      - Adjust products array to addedit items
+      - Images use placeholders; replace with real URLs
+     
+
+     Sample product data
+    const PRODUCTS = [
+      { id p1, title Sky Blue Bomber Jacket, category Jackets, price 89.00, img httpsimages.unsplash.comphoto-1541099649105-f69ad21f3246q=80&w=800&auto=format&fit=crop&crop=faces , desc Lightweight bomber for mild weather.},
+      { id p2, title Classic White Tee, category Tops, price 19.50, img httpsimages.unsplash.comphoto-1520975914109-2b1f6b11f1e0q=80&w=800&auto=format&fit=crop&crop=faces, desc Premium cotton, regular fit.},
+      { id p3, title Slim Denim Jeans, category Bottoms, price 59.99, img httpsimages.unsplash.comphoto-1541099649105-45c1fdea6b1bq=80&w=800&auto=format&fit=crop, desc Stretch denim, tapered legs.},
+      { id p4, title Wool Overcoat, category Coats, price 149.00, img httpsimages.unsplash.comphoto-1489987707025-afc232f7ea0fq=80&w=800&auto=format&fit=crop, desc Warm and stylish for cold days.},
+      { id p5, title Sporty Mesh Sneakers, category Shoes, price 69.95, img httpsimages.unsplash.comphoto-1560769629-975ec94e6a86q=80&w=800&auto=format&fit=crop, desc Breathable runners for everyday use.},
+      { id p6, title Checked Flannel Shirt, category Tops, price 39.00, img httpsimages.unsplash.comphoto-1512436991641-6745cdb1723fq=80&w=800&auto=format&fit=crop, desc Cozy brushed flannel.},
+      { id p7, title Cargo Shorts, category Bottoms, price 34.99, img httpsimages.unsplash.comphoto-1503341455253-b2e723bb3dbbq=80&w=800&auto=format&fit=crop, desc Functional pockets and relaxed fit.},
+      { id p8, title Leather Belt, category Accessories, price 24.00, img httpsimages.unsplash.comphoto-1523275335684-37898b6baf30q=80&w=800&auto=format&fit=crop, desc Genuine leather, classic buckle.},
+      { id p9, title Summer Linen Shirt, category Tops, price 44.00, img httpsimages.unsplash.comphoto-1530845645179-0f7b8b6f05b5q=80&w=800&auto=format&fit=crop, desc Breathable linen for hot days.},
+      { id p10, title Trench Coat, category Coats, price 129.99, img httpsimages.unsplash.comphoto-1519741490849-4a3e6bde9d12q=80&w=800&auto=format&fit=crop, desc A modern take on a timeless silhouette.}
+    ];
+
+     App state
+    let state = {
+      products PRODUCTS.slice(),
+      search ,
+      category All,
+      minPrice null,
+      maxPrice null,
+      sort featured,
+      cart {}  id = {product, qty}
+    };
+
+     Elements
+    const productsEl = document.getElementById(products);
+    const categoriesEl = document.getElementById(categories);
+    const searchEl = document.getElementById(search);
+    const sortEl = document.getElementById(sort);
+    const resultCountEl = document.getElementById(resultCount);
+    const cartBtn = document.getElementById(cartBtn);
+    const cartCountEl = document.getElementById(cartCount);
+    const cartDrawer = document.getElementById(cartDrawer);
+    const closeCart = document.getElementById(closeCart);
+    const cartItemsEl = document.getElementById(cartItems);
+    const cartTotalEl = document.getElementById(cartTotal);
+    const checkoutBtn = document.getElementById(checkoutBtn);
+    const clearCartBtn = document.getElementById(clearCartBtn);
+    const clearFiltersBtn = document.getElementById(clearFilters);
+    const minPriceEl = document.getElementById(minPrice);
+    const maxPriceEl = document.getElementById(maxPrice);
+    const applyPriceBtn = document.getElementById(applyPrice);
+    const clearPriceBtn = document.getElementById(clearPrice);
+
+     Initialize categories
+    function initCategories(){
+      const cats = [All, ...new Set(PRODUCTS.map(p=p.category))];
+      categoriesEl.innerHTML = ;
+      cats.forEach(cat={
+        const btn = document.createElement(button);
+        btn.className = cat-btn + (state.category === cat   active  );
+        btn.textContent = cat;
+        btn.onclick = ()={
+          state.category = cat;
+          document.querySelectorAll(.cat-btn).forEach(b=b.classList.remove(active));
+          btn.classList.add(active);
+          renderProducts();
+        };
+        categoriesEl.appendChild(btn);
+      });
+    }
+
+     Render products based on filters
+    function renderProducts(){
+      let list = PRODUCTS.slice();
+
+       Search
+      if(state.search){
+        const q = state.search.toLowerCase();
+        list = list.filter(p = p.title.toLowerCase().includes(q)  (p.desc && p.desc.toLowerCase().includes(q)));
+      }
+
+       Category
+      if(state.category && state.category !== All){
+        list = list.filter(p = p.category === state.category);
+      }
+
+       Price filter
+      if(state.minPrice != null && !isNaN(state.minPrice)){
+        list = list.filter(p = p.price = state.minPrice);
+      }
+      if(state.maxPrice != null && !isNaN(state.maxPrice)){
+        list = list.filter(p = p.price = state.maxPrice);
+      }
+
+       Sorting
+      if(state.sort === price-asc){
+        list.sort((a,b)=a.price-b.price);
+      } else if(state.sort === price-desc){
+        list.sort((a,b)=b.price-a.price);
+      } else if(state.sort === name){
+        list.sort((a,b)=a.title.localeCompare(b.title));
+      }  featured = default order
+
+      resultCountEl.textContent = list.length;
+
+       Render grid
+      productsEl.innerHTML = ;
+      list.forEach(p={
+        const card = document.createElement(article);
+        card.className = card;
+        card.innerHTML = `
+          div class=img
+            img src=${p.img} alt=${p.title} loading=lazy
+          div
+          div class=meta
+            div class=title${p.title}div
+            div class=price$${p.price.toFixed(2)}div
+          div
+          div class=desc${p.desc  }div
+          div class=actions
+            button class=btn ghost data-id=${p.id}Viewbutton
+            button class=btn primary data-id=${p.id}Add to cartbutton
+          div
+        `;
+         view button (simple modal)
+        card.querySelector(.btn.ghost).addEventListener(click, ()={
+          alert(p.title + nn + p.desc + nnPrice $ + p.price.toFixed(2));
+        });
+         add to cart
+        card.querySelector(.btn.primary).addEventListener(click, ()={
+          addToCart(p.id, 1);
+        });
+
+        productsEl.appendChild(card);
+      });
+
+      if(list.length === 0){
+        productsEl.innerHTML = 'div class=emptydiv style=font-size18px;font-weight700No items founddivdiv style=colorvar(--muted)Try different filters or searchdivdiv';
+      }
+    }
+
+     Cart operations
+    function loadCart(){
+      try {
+        const s = localStorage.getItem(mini_store_cart_v1);
+        if(s) state.cart = JSON.parse(s);
+      } catch(e){ state.cart = {}; }
+      updateCartUI();
+    }
+    function saveCart(){
+      localStorage.setItem(mini_store_cart_v1, JSON.stringify(state.cart));
+    }
+    function addToCart(id, qty=1){
+      const p = PRODUCTS.find(x=x.id===id);
+      if(!p) return;
+      if(state.cart[id]) state.cart[id].qty += qty;
+      else state.cart[id] = { product p, qty qty };
+      saveCart();
+      updateCartUI();
+       Brief visual feedback
+      cartBtn.animate([{ transform 'scale(1)' }, { transform 'scale(1.06)' }, { transform 'scale(1)' }], { duration220 });
+      openCart();
+    }
+    function removeFromCart(id){
+      delete state.cart[id];
+      saveCart();
+      updateCartUI();
+    }
+    function changeQty(id, qty){
+      if(!state.cart[id]) return;
+      state.cart[id].qty = Math.max(1, qty);
+      saveCart();
+      updateCartUI();
+    }
+    function clearCart(){
+      state.cart = {};
+      saveCart();
+      updateCartUI();
+    }
+
+    function updateCartUI(){
+       Count & total
+      const items = Object.values(state.cart);
+      const totalCount = items.reduce((s,i)=s+i.qty,0);
+      const totalPrice = items.reduce((s,i)=s + i.qty  i.product.price, 0);
+
+      cartCountEl.textContent = totalCount;
+      cartTotalEl.textContent = $ + totalPrice.toFixed(2);
+
+       Cart items
+      cartItemsEl.innerHTML = ;
+      if(items.length === 0){
+        cartItemsEl.innerHTML = 'div class=emptydiv style=font-weight700Your cart is emptydivdiv style=colorvar(--muted)Add items you lovedivdiv';
+        return;
+      }
+
+      items.forEach(({product, qty})={
+        const item = document.createElement(div);
+        item.className = cart-item;
+        item.innerHTML = `
+          img src=${product.img} alt=${product.title}
+          div class=info
+            div style=font-weight700${product.title}div
+            div style=colorvar(--muted);font-size13px$${product.price.toFixed(2)} eachdiv
+            div style=margin-top8px;displayflex;justify-contentspace-between;align-itemscenter;gap8px
+              div class=qty-controls data-id=${product.id}
+                button class=dec-button
+                div style=min-width28px;text-aligncenter${qty}div
+                button class=inc+button
+              div
+              button class=btn ghost remove data-id=${product.id}Removebutton
+            div
+          div
+        `;
+         Attach events
+        item.querySelector(.dec).addEventListener(click, ()={
+          changeQty(product.id, qty - 1);
+        });
+        item.querySelector(.inc).addEventListener(click, ()={
+          changeQty(product.id, qty + 1);
+        });
+        item.querySelector(.remove).addEventListener(click, ()={
+          removeFromCart(product.id);
+        });
+
+        cartItemsEl.appendChild(item);
+      });
+    }
+
+     Cart drawer controls
+    function openCart(){ cartDrawer.classList.add(open); cartDrawer.setAttribute(aria-hidden,false); }
+    function closeCartFn(){ cartDrawer.classList.remove(open); cartDrawer.setAttribute(aria-hidden,true); }
+
+     Checkout (mock)
+    function checkout(){
+      const items = Object.values(state.cart);
+      if(items.length === 0){ alert(Your cart is empty.); return; }
+       Simple mock checkout
+      const total = items.reduce((s,i)=s + i.qty  i.product.price, 0);
+      if(confirm(Proceed to mock checkoutnTotal $ + total.toFixed(2))){
+         Simulate order success
+        clearCart();
+        closeCartFn();
+        alert(Thank you! Your order has been placed (mock).);
+      }
+    }
+
+     Filters & events
+    searchEl.addEventListener(input, (e)={
+      state.search = e.target.value.trim();
+      renderProducts();
+    });
+    sortEl.addEventListener(change, (e)={
+      state.sort = e.target.value;
+      renderProducts();
+    });
+    cartBtn.addEventListener(click, ()= {
+      if(cartDrawer.classList.contains(open)) closeCartFn(); else openCart();
+    });
+    closeCart.addEventListener(click, closeCartFn);
+    checkoutBtn.addEventListener(click, checkout);
+    clearCartBtn.addEventListener(click, ()={
+      if(confirm(Clear cart)) clearCart();
+    });
+
+    clearFiltersBtn.addEventListener(click, ()={
+      state.search = ;
+      state.category = All;
+      state.minPrice = null;
+      state.maxPrice = null;
+      state.sort = featured;
+      searchEl.value = ;
+      sortEl.value = featured;
+      minPriceEl.value = ;
+      maxPriceEl.value = ;
+      initCategories();
+      renderProducts();
+    });
+
+    applyPriceBtn.addEventListener(click, ()={
+      const min = parseFloat(minPriceEl.value);
+      const max = parseFloat(maxPriceEl.value);
+      state.minPrice = isNaN(min)  null  min;
+      state.maxPrice = isNaN(max)  null  max;
+      renderProducts();
+    });
+    clearPriceBtn.addEventListener(click, ()={
+      minPriceEl.value = ;
+      maxPriceEl.value = ;
+      state.minPrice = null;
+      state.maxPrice = null;
+      renderProducts();
+    });
+
+     Keyboard Esc to close cart
+    document.addEventListener(keydown, (e)={
+      if(e.key === Escape) closeCartFn();
+    });
+
+     Initialize app
+    function init(){
+      initCategories();
+      loadCart();
+      renderProducts();
+    }
+    init();
+
+     Expose addToCart for debugging in console if needed
+    window._miniStore = { addToCart, state };
+  script
+body
+html
