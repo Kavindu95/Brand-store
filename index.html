@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Mini Clothing Store</title>
+  <title>BRAVON</title>
 
   <!-- Google Fonts (optional) -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
@@ -245,7 +245,7 @@
       <div class="brand">
         <div class="logo">CS</div>
         <div>
-          <h1>Clothory</h1>
+          <h1>BRAVON</h1>
           <div class="subtitle">Casual, Street & Classic — curated picks</div>
         </div>
       </div>
@@ -266,7 +266,7 @@
         </div>
 
         <div class="control">
-          <button id="clearFilters" class="icon-btn" title="Reset">Reset</button>
+          <button id="clearFilters" class="icon-btn" title="Reset">SignUp</button>
         </div>
       </div>
     </header>
@@ -335,19 +335,48 @@
      * - Images use placeholders; replace with real URLs
      ************************************************/
 
-    // Sample product data
-    const PRODUCTS = [
-      { id: "p1", title: "Sky Blue Bomber Jacket", category: "Jackets", price: 89.00, img: "https://images.unsplash.com/photo-1541099649105-f69ad21f3246?q=80&w=800&auto=format&fit=crop&crop=faces" , desc: "Lightweight bomber for mild weather."},
-      { id: "p2", title: "Classic White Tee", category: "Tops", price: 19.50, img: "https://images.unsplash.com/photo-1520975914109-2b1f6b11f1e0?q=80&w=800&auto=format&fit=crop&crop=faces", desc: "Premium cotton, regular fit."},
-      { id: "p3", title: "Slim Denim Jeans", category: "Bottoms", price: 59.99, img: "https://images.unsplash.com/photo-1541099649105-45c1fdea6b1b?q=80&w=800&auto=format&fit=crop", desc: "Stretch denim, tapered legs."},
-      { id: "p4", title: "Wool Overcoat", category: "Coats", price: 149.00, img: "https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?q=80&w=800&auto=format&fit=crop", desc: "Warm and stylish for cold days."},
-      { id: "p5", title: "Sporty Mesh Sneakers", category: "Shoes", price: 69.95, img: "https://images.unsplash.com/photo-1560769629-975ec94e6a86?q=80&w=800&auto=format&fit=crop", desc: "Breathable runners for everyday use."},
-      { id: "p6", title: "Checked Flannel Shirt", category: "Tops", price: 39.00, img: "https://images.unsplash.com/photo-1512436991641-6745cdb1723f?q=80&w=800&auto=format&fit=crop", desc: "Cozy brushed flannel."},
-      { id: "p7", title: "Cargo Shorts", category: "Bottoms", price: 34.99, img: "https://images.unsplash.com/photo-1503341455253-b2e723bb3dbb?q=80&w=800&auto=format&fit=crop", desc: "Functional pockets and relaxed fit."},
-      { id: "p8", title: "Leather Belt", category: "Accessories", price: 24.00, img: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=800&auto=format&fit=crop", desc: "Genuine leather, classic buckle."},
-      { id: "p9", title: "Summer Linen Shirt", category: "Tops", price: 44.00, img: "https://images.unsplash.com/photo-1530845645179-0f7b8b6f05b5?q=80&w=800&auto=format&fit=crop", desc: "Breathable linen for hot days."},
-      { id: "p10", title: "Trench Coat", category: "Coats", price: 129.99, img: "https://images.unsplash.com/photo-1519741490849-4a3e6bde9d12?q=80&w=800&auto=format&fit=crop", desc: "A modern take on a timeless silhouette."}
-    ];
+   // Sample product data (updated image URLs)
+const PRODUCTS = [
+  { id: "p1", title: "Sky Blue Bomber Jacket", category: "Jackets", price: 89.00,
+    img: "https://images.unsplash.com/photo-1549366029-6d8f8f8f6b3b?q=80&w=800&auto=format&fit=crop",
+    desc: "Lightweight bomber for mild weather." },
+
+  { id: "p2", title: "Classic White Tee", category: "Tops", price: 19.50,
+    img: "https://images.unsplash.com/photo-1520975914109-2b1f6b11f1e0?q=80&w=800&auto=format&fit=crop",
+    desc: "Premium cotton, regular fit." },
+
+  { id: "p3", title: "Slim Denim Jeans", category: "Bottoms", price: 59.99,
+    img: "https://images.unsplash.com/photo-1514996937319-344454492b37?q=80&w=800&auto=format&fit=crop",
+    desc: "Stretch denim, tapered legs." },
+
+  { id: "p4", title: "Wool Overcoat", category: "Coats", price: 149.00,
+    img: "https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?q=80&w=800&auto=format&fit=crop",
+    desc: "Warm and stylish for cold days." },
+
+  { id: "p5", title: "Sporty Mesh Sneakers", category: "Shoes", price: 69.95,
+    img: "https://images.unsplash.com/photo-1528701800489-4761b7b5a3d9?q=80&w=800&auto=format&fit=crop",
+    desc: "Breathable runners for everyday use." },
+
+  { id: "p6", title: "Checked Flannel Shirt", category: "Tops", price: 39.00,
+    img: "https://images.unsplash.com/photo-1503342452485-86c6b0f5f0a8?q=80&w=800&auto=format&fit=crop",
+    desc: "Cozy brushed flannel." },
+
+  { id: "p7", title: "Cargo Shorts", category: "Bottoms", price: 34.99,
+    img: "https://images.unsplash.com/photo-1520975698513-1c9b4f0b8c87?q=80&w=800&auto=format&fit=crop",
+    desc: "Functional pockets and relaxed fit." },
+
+  { id: "p8", title: "Leather Belt", category: "Accessories", price: 24.00,
+    img: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=800&auto=format&fit=crop",
+    desc: "Genuine leather, classic buckle." },
+
+  { id: "p9", title: "Summer Linen Shirt", category: "Tops", price: 44.00,
+    img: "https://images.unsplash.com/photo-1530845645179-0f7b8b6f05b5?q=80&w=800&auto=format&fit=crop",
+    desc: "Breathable linen for hot days." },
+
+  { id: "p10", title: "Trench Coat", category: "Coats", price: 129.99,
+    img: "https://images.unsplash.com/photo-1519741490849-4a3e6bde9d12?q=80&w=800&auto=format&fit=crop",
+    desc: "A modern take on a timeless silhouette." }
+];
 
     // App state
     let state = {
